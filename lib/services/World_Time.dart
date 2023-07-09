@@ -22,7 +22,7 @@ class WorldTime {
     DateTime now = DateTime.parse(datetime);
     offset = offset.substring(1 , 3);
     now = now.add(Duration(hours: int.parse(offset)));
-     isDaytime = now.hour > 4  && now.hour < 20 ? true : false;
+     isDaytime = now.hour > 6  && now.hour < 20 ? true : false;
      time =  DateFormat.jm().format(now);
     print(now);
     print('$base$url');

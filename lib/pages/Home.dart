@@ -15,7 +15,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
 
-    data = ModalRoute.of(context)?.settings.arguments as Map;
+    data = data.isNotEmpty ? data : ModalRoute.of(context)?.settings.arguments as Map;
     print(data);
 
 
@@ -36,8 +36,17 @@ class _HomeState extends State<Home> {
         children: <Widget>[
 
               FilledButton.icon(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/Location');
+                  onPressed: () async {
+                   dynamic result = await Navigator.pushNamed(context, '/Location');
+                   setState(() {
+                     data = {
+                       'time' : result['time'],
+                       'location' : result['location'],
+                       'isDaytime' : result['isDaytime'],
+                       'flag' : result['flag'],
+
+                     };
+                   });
                   },
                   icon: Icon(Icons.edit_location),
                  label:Text('Change Location') ,
